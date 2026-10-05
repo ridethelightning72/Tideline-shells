@@ -1,10 +1,10 @@
 // The shop catalog. Each entry is one species/grade you sell.
 //
 //   id          unique, lowercase, no spaces (used in the page URL)
-//   name        scientific name, e.g. "Cypraea tigris"
-//   author      optional authority, e.g. "Linnaeus, 1758"
-//   common      optional common name
-//   family      e.g. "Cypraeidae" (drives the family filter)
+//   name        English name, e.g. "Tiger cowrie"
+//   scientific  optional scientific name, e.g. "Cypraea tigris"
+//               (leave out or "" if unknown)
+//   type        English shell type, e.g. "Cowries" (drives the type filter)
 //   sizeMm      typical size in millimetres
 //   price       price in NZD for one specimen
 //   stock       how many you have; 0 shows "Sold out" + a notify-me form
@@ -15,10 +15,9 @@
 window.SHELLS = [
   {
     id: "cypraea-tigris",
-    name: "Cypraea tigris",
-    author: "Linnaeus, 1758",
-    common: "Tiger cowrie",
-    family: "Cypraeidae",
+    name: "Tiger cowrie",
+    scientific: "Cypraea tigris",
+    type: "Cowries",
     sizeMm: 85,
     price: 35,
     stock: 6,
@@ -27,10 +26,9 @@ window.SHELLS = [
   },
   {
     id: "conus-textile",
-    name: "Conus textile",
-    author: "Linnaeus, 1758",
-    common: "Textile cone",
-    family: "Conidae",
+    name: "Textile cone",
+    scientific: "Conus textile",
+    type: "Cones",
     sizeMm: 72,
     price: 28,
     stock: 4,
@@ -39,10 +37,9 @@ window.SHELLS = [
   },
   {
     id: "murex-pecten",
-    name: "Murex pecten",
-    author: "Lightfoot, 1786",
-    common: "Venus comb murex",
-    family: "Muricidae",
+    name: "Venus comb murex",
+    scientific: "Murex pecten",
+    type: "Murex",
     sizeMm: 120,
     price: 65,
     stock: 2,
@@ -51,10 +48,9 @@ window.SHELLS = [
   },
   {
     id: "haliotis-iris",
-    name: "Haliotis iris",
-    author: "Gmelin, 1791",
-    common: "Pāua",
-    family: "Haliotidae",
+    name: "Pāua",
+    scientific: "Haliotis iris",
+    type: "Abalone & pāua",
     sizeMm: 140,
     price: 45,
     stock: 8,
@@ -63,10 +59,9 @@ window.SHELLS = [
   },
   {
     id: "amalda-australis",
-    name: "Amalda australis",
-    author: "Sowerby I, 1830",
-    common: "Southern olive",
-    family: "Ancillariidae",
+    name: "Southern olive",
+    scientific: "Amalda australis",
+    type: "Olives",
     sizeMm: 38,
     price: 18,
     stock: 0,
@@ -75,10 +70,9 @@ window.SHELLS = [
   },
   {
     id: "harpa-major",
-    name: "Harpa major",
-    author: "Röding, 1798",
-    common: "Major harp",
-    family: "Harpidae",
+    name: "Major harp",
+    scientific: "Harpa major",
+    type: "Harps",
     sizeMm: 90,
     price: 32,
     stock: 3,
@@ -87,10 +81,9 @@ window.SHELLS = [
   },
   {
     id: "cypraea-mappa",
-    name: "Leporicypraea mappa",
-    author: "Linnaeus, 1758",
-    common: "Map cowrie",
-    family: "Cypraeidae",
+    name: "Map cowrie",
+    scientific: "Leporicypraea mappa",
+    type: "Cowries",
     sizeMm: 70,
     price: 55,
     stock: 1,
@@ -99,10 +92,9 @@ window.SHELLS = [
   },
   {
     id: "lambis-chiragra",
-    name: "Harpago chiragra",
-    author: "Linnaeus, 1758",
-    common: "Chiragra spider conch",
-    family: "Strombidae",
+    name: "Chiragra spider conch",
+    scientific: "Harpago chiragra",
+    type: "Conchs",
     sizeMm: 160,
     price: 48,
     stock: 0,

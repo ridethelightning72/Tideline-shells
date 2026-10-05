@@ -25,6 +25,11 @@
     return null;
   }
 
+  // Small italic scientific-name line, only when one is known.
+  function sciHtml(shell, tag) {
+    return shell.scientific ? "<" + tag + ' class="sci-sub">' + esc(shell.scientific) + "</" + tag + ">" : "";
+  }
+
   function photo(shell, i) {
     return (shell.photos && shell.photos[i || 0]) || PLACEHOLDER;
   }
@@ -196,7 +201,7 @@
       return '<div class="line-item">' +
         '<img src="' + esc(photo(s)) + '" alt="">' +
         "<div>" +
-          '<a class="sci" href="shell.html?id=' + encodeURIComponent(s.id) + '">' + esc(s.name) + "</a>" +
+          '<a class="title" href="shell.html?id=' + encodeURIComponent(s.id) + '">' + esc(s.name) + "</a>" +
           '<div class="line-controls">' +
             '<button type="button" data-act="dec" data-id="' + esc(s.id) + '" aria-label="One less">&minus;</button>' +
             "<span>" + l.qty + "</span>" +
@@ -223,9 +228,9 @@
         (st.cls ? '<span class="badge ' + st.cls + '">' + st.text + "</span>" : "") +
       "</div>" +
       '<div class="card-body">' +
-        '<div class="meta">' + esc(s.family) + "</div>" +
-        '<div class="sci">' + esc(s.name) + "</div>" +
-        (s.common ? '<div class="common">' + esc(s.common) + "</div>" : "") +
+        '<div class="meta">' + esc(s.type) + "</div>" +
+        '<div class="title">' + esc(s.name) + "</div>" +
+        sciHtml(s, "div") +
         '<div class="card-foot"><span class="price">' + money(s.price) + "</span>" +
         '<span class="stock-note">' + s.sizeMm + " mm</span></div>" +
       "</div>" +
@@ -234,23 +239,23 @@
 
   function initCatalog() {
     var grid = $("#grid");
-    var q = $("#f-search"), fam = $("#f-family"), size = $("#f-size"), sort = $("#f-sort"), inStock = $("#f-instock");
+    var q = $("#f-search"), fam = $("#f-type"), size = $("#f-size"), sort = $("#f-sort"), inStock = $("#f-instock");
 
-    var families = SHELLS.map(function (s) { return s.family; })
+    var types = SHELLS.map(function (s) { return s.type; })
       .filter(function (f, i, a) { return f && a.indexOf(f) === i; })
       .sort();
-    fam.innerHTML = '<option value="">All families</option>' +
-      families.map(function (f) { return '<option value="' + esc(f) + '">' + esc(f) + "</option>"; }).join("");
+    fam.innerHTML = '<option value="">All types</option>' +
+      types.map(function (f) { return '<option value="' + esc(f) + '">' + esc(f) + "</option>"; }).join("");
 
     function apply() {
       var term = q.value.trim().toLowerCase();
       var sizeRange = size.value ? size.value.split("-").map(Number) : null;
       var list = SHELLS.filter(function (s) {
-        if (fam.value && s.family !== fam.value) return false;
+        if (fam.value && s.type !== fam.value) return false;
         if (inStock.checked && s.stock <= 0) return false;
         if (sizeRange && (s.sizeMm < sizeRange[0] || s.sizeMm > sizeRange[1])) return false;
         if (term) {
-          var hay = [s.name, s.common, s.family, s.author].join(" ").toLowerCase();
+          var hay = [s.name, s.scientific, s.type].join(" ").toLowerCase();
           if (hay.indexOf(term) === -1) return false;
         }
         return true;
@@ -262,7 +267,7 @@
         if (key === "price-desc") return b.price - a.price;
         if (key === "size-asc") return a.sizeMm - b.sizeMm;
         if (key === "size-desc") return b.sizeMm - a.sizeMm;
-        if (key === "family") return a.family.localeCompare(b.family) || a.name.localeCompare(b.name);
+        if (key === "type") return a.type.localeCompare(b.type) || a.name.localeCompare(b.name);
         return a.name.localeCompare(b.name);
       });
 
@@ -304,13 +309,14 @@
           : "") +
       "</div>" +
       "<div>" +
-        '<p class="eyebrow">' + esc(s.family) + "</p>" +
+        '<p class="eyebrow">' + esc(s.type) + "</p>" +
         "<h1>" + esc(s.name) + "</h1>" +
-        '<p class="author">' + esc(s.author || "") + (s.common ? (s.author ? " &middot; " : "") + esc(s.common) : "") + "</p>" +
+        sciHtml(s, "p") +
         '<div class="price">' + money(s.price) + ' <span class="fine">each</span></div>' +
         (s.description ? "<p>" + esc(s.description) + "</p>" : "") +
         '<dl class="specs">' +
-          "<dt>Family</dt><dd>" + esc(s.family) + "</dd>" +
+          "<dt>Type</dt><dd>" + esc(s.type) + "</dd>" +
+          (s.scientific ? '<dt>Scientific</dt><dd><em>' + esc(s.scientific) + "</em></dd>" : "") +
           "<dt>Size</dt><dd>" + s.sizeMm + " mm</dd>" +
           '<dt>Stock</dt><dd class="stock-note ' + st.cls + '">' + st.text + "</dd>" +
         "</dl>" +
@@ -368,7 +374,7 @@
         ? t.lines.map(function (l) {
             return '<div class="line-item" style="grid-template-columns:48px 1fr auto">' +
               '<img src="' + esc(photo(l.shell)) + '" alt="" style="width:48px;height:48px">' +
-              '<div><span class="sci" style="font-size:1rem">' + esc(l.shell.name) + '</span><div class="fine">Qty ' + l.qty + " &times; " + money(l.shell.price) + "</div></div>" +
+              '<div><span class="title" style="font-size:1rem">' + esc(l.shell.name) + '</span><div class="fine">Qty ' + l.qty + " &times; " + money(l.shell.price) + "</div></div>" +
               "<div>" + money(l.total) + "</div></div>";
           }).join("") + '<div style="margin-top:16px">' + totalsHtml(t) + "</div>"
         : '<p class="empty">Your cart is empty. <a href="index.html#catalog">Browse shells</a></p>';
@@ -377,7 +383,7 @@
 
       // Plain-text copy of the order that gets emailed to you.
       $("#order-field").value = t.lines.map(function (l) {
-        return l.qty + " x " + l.shell.name + " [" + l.shell.id + "] @ " + money(l.shell.price) + " = " + money(l.total);
+        return l.qty + " x " + l.shell.name + (l.shell.scientific ? " (" + l.shell.scientific + ")" : "") + " [" + l.shell.id + "] @ " + money(l.shell.price) + " = " + money(l.total);
       }).join("\n") +
         "\n\nSubtotal: " + money(t.subtotal) +
         "\nShipping: " + money(t.shipping) +

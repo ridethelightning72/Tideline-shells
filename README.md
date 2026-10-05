@@ -8,7 +8,7 @@ There's no card checkout. Customers add shells to a cart and send an **order req
 
 | Page | What it does |
 |---|---|
-| `index.html` | Catalog with search, family, size filters and sorting |
+| `index.html` | Catalog with search, type and size filters, and sorting |
 | `shell.html?id=…` | Species page: photo gallery with zoom, size, stock, add to cart. Sold-out species show a "Notify me" form |
 | `order.html` | Order request form (address + bank/crypto choice) with order summary |
 | `how-to-order.html` | The 3-step ordering process and FAQ |
@@ -18,7 +18,7 @@ There's no card checkout. Customers add shells to a cart and send an **order req
 
 All the shop data is in two files:
 
-- **`data/shells.js`**: every species, with its price, size, stock and photos. Set `stock: 0` to show *Sold out*.
+- **`data/shells.js`**: every shell, with its English name, type (Cowries, Cones…), price, size, stock and photos. The scientific name is optional: when it's filled in, it shows in small italics under the English name. Set `stock: 0` to show *Sold out*.
 - **`data/config.js`**: flat shipping rate, hold period, contact email.
 
 Photos go in `assets/img/shells/` and are listed in each shell's `photos` (first photo = main image). Square images around 1200×1200 px on a dark background look best. Shells with no photos show a "Photo coming soon" placeholder.
