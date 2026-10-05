@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shell | Tideline Shells</title>
+  <link rel="icon" href="assets/img/placeholder.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="product">
+
+  <main class="wrap">
+    <div class="product" id="product"></div>
+
+    <!-- Shown only when a species is sold out. Netlify emails you each sign-up. -->
+    <section class="notify-box" id="notify-section" style="margin-bottom:80px">
+      <h3>Sold out: get notified</h3>
+      <p class="fine">Leave your email and we'll let you know when <span id="notify-name">this species</span> is back in stock.</p>
+      <form name="notify" method="POST" action="/thanks.html?for=notify" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="notify">
+        <input type="hidden" name="species" id="notify-species" value="">
+        <p class="hidden"><label>Leave empty: <input name="bot-field"></label></p>
+        <input type="email" name="email" required placeholder="you@example.com" aria-label="Email address">
+        <button class="btn" type="submit">Notify me</button>
+      </form>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox"><img id="lightbox-img" alt=""></div>
+
+  <script src="data/config.js"></script>
+  <script src="data/shells.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

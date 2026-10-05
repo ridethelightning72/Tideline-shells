@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thank you | Tideline Shells</title>
+  <link rel="icon" href="assets/img/placeholder.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="thanks">
+
+  <main class="page">
+    <div class="wrap narrow">
+      <div id="msg-order">
+        <p class="eyebrow">Step 2 of 3</p>
+        <h1>Order request received</h1>
+        <p>Thank you! We're checking your specimens now. Within 24 hours you'll get an email with:</p>
+        <ul>
+          <li>confirmation that everything is in stock,</li>
+          <li>your order reference and total, and</li>
+          <li>bank account or wallet details for payment.</li>
+        </ul>
+        <p>We hold your shells for <span data-cfg="holdDays"></span> days and post them as soon as payment arrives.</p>
+      </div>
+      <div id="msg-notify" class="hidden">
+        <h1>You're on the list</h1>
+        <p>We'll email you as soon as that species is back in stock.</p>
+      </div>
+      <p style="margin-top:32px"><a class="btn btn-ghost" href="index.html#catalog">Keep browsing</a></p>
+    </div>
+  </main>
+
+  <script src="data/config.js"></script>
+  <script src="data/shells.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    if (new URLSearchParams(location.search).get("for") === "notify") {
+      document.getElementById("msg-order").classList.add("hidden");
+      document.getElementById("msg-notify").classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>

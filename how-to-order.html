@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to order &amp; FAQ | Tideline Shells</title>
+  <link rel="icon" href="assets/img/placeholder.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="how">
+
+  <main class="page">
+    <div class="wrap narrow">
+      <p class="eyebrow">Ordering</p>
+      <h1>How to order</h1>
+      <p>We don't take card payments online. Instead, every order is checked by hand before you pay, so you never pay for a shell that has already gone.</p>
+
+      <ol class="steps">
+        <li><strong>Request your order</strong>Add shells to your cart and send an order request with your delivery address and preferred payment method.</li>
+        <li><strong>We confirm and send payment details</strong>Within 24 hours we email you to confirm stock, with your order reference, total, and bank or wallet details. Your shells are held for <span data-cfg="holdDays"></span> days.</li>
+        <li><strong>Pay and we post</strong>Pay by NZ bank transfer or stablecoin. Once payment arrives, your shells are carefully packed and sent tracked.</li>
+      </ol>
+
+      <h2 style="margin-top:56px">Frequently asked questions</h2>
+
+      <details>
+        <summary>How much is shipping?</summary>
+        <p>A flat <span data-cfg="shippingFlatRate"></span> per order anywhere in New Zealand, tracked. Every specimen is individually wrapped and boxed.</p>
+      </details>
+      <details>
+        <summary>Do you ship overseas?</summary>
+        <p>Not yet. We ship to <span data-cfg="shipsTo"></span>. If you're overseas, leave your email on a sold-out species or contact us and we'll let you know when international shipping opens.</p>
+      </details>
+      <details>
+        <summary>How do I pay by bank transfer?</summary>
+        <p>After we confirm your order, we email our NZ bank account number. Please use your order reference as the payment reference so we can match it.</p>
+      </details>
+      <details>
+        <summary>How do I pay with crypto?</summary>
+        <p>We accept stablecoins (USDC or USDT) only, so the price can't move between ordering and paying. We email you the wallet address, network and exact amount. Please double-check the network before sending, because payments sent on the wrong network can't be recovered.</p>
+      </details>
+      <details>
+        <summary>What if I don't pay within the hold period?</summary>
+        <p>After <span data-cfg="holdDays"></span> days the shells are released back into stock. Just reply to our email if you need a little more time.</p>
+      </details>
+      <details>
+        <summary>How are sizes measured?</summary>
+        <p>Sizes are the greatest length in millimetres, measured with calipers. Individual specimens may vary slightly from the listed size; ask if you need an exact measurement.</p>
+      </details>
+      <details>
+        <summary>Can I return a shell?</summary>
+        <p>If a specimen arrives damaged or isn't as described, contact us within 7 days with photos and we'll refund or replace it. Your rights under the NZ Consumer Guarantees Act always apply.</p>
+      </details>
+      <details>
+        <summary>Are your shells legally and ethically sourced?</summary>
+        <p>Yes. We don't sell species protected under CITES or New Zealand wildlife law without the required permits, and we can tell you the origin of any specimen on request.</p>
+      </details>
+      <details>
+        <summary>A species I want is sold out. What can I do?</summary>
+        <p>Open the species page and use the "Notify me" form. We'll email you when it's back.</p>
+      </details>
+
+      <p style="margin-top:40px">Still have a question? Email <a data-cfg="contactEmail" id="contact-link" href="#"></a>.</p>
+    </div>
+  </main>
+
+  <script src="data/config.js"></script>
+  <script src="data/shells.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.getElementById("contact-link").href = "mailto:" + window.SHOP_CONFIG.contactEmail;
+  </script>
+</body>
+</html>

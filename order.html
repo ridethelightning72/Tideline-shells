@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request your order | Tideline Shells</title>
+  <link rel="icon" href="assets/img/placeholder.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="order">
+
+  <main class="page">
+    <div class="wrap">
+      <p class="eyebrow">Step 1 of 3</p>
+      <h1>Request your order</h1>
+      <p style="max-width:640px">No payment is taken now. We'll check every specimen, then email you payment details within 24 hours. Your shells are held for <span data-cfg="holdDays"></span> days while you pay.</p>
+
+      <div class="order-layout" style="margin-top:32px">
+        <!-- Netlify picks up this form and emails each submission to you. -->
+        <form id="order-form" name="order" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="order">
+          <textarea name="order" id="order-field" class="hidden" readonly></textarea>
+          <input type="hidden" name="total" id="total-field">
+          <p class="hidden"><label>Leave empty: <input name="bot-field"></label></p>
+
+          <div class="form-grid">
+            <label class="field">Full name <input name="name" required autocomplete="name"></label>
+            <label class="field">Email <input name="email" type="email" required autocomplete="email"></label>
+            <label class="field full">Phone (optional) <input name="phone" type="tel" autocomplete="tel"></label>
+            <label class="field full">Street address <input name="address" required autocomplete="street-address"></label>
+            <label class="field">Suburb <input name="suburb" autocomplete="address-level3"></label>
+            <label class="field">Town / City <input name="city" required autocomplete="address-level2"></label>
+            <label class="field">Postcode <input name="postcode" required inputmode="numeric" pattern="[0-9]{4}" title="4-digit NZ postcode" autocomplete="postal-code"></label>
+            <label class="field">Country <input name="country" value="New Zealand" readonly></label>
+
+            <fieldset class="full">
+              <legend>How would you like to pay?</legend>
+              <label class="radio"><input type="radio" name="payment" value="Bank transfer" required checked>
+                <span>Bank transfer (NZ)<small>We email our account number and your order reference.</small></span></label>
+              <label class="radio"><input type="radio" name="payment" value="Crypto (stablecoin)">
+                <span>Crypto (stablecoin)<small>We email a wallet address and the exact amount in USDC or USDT.</small></span></label>
+            </fieldset>
+
+            <label class="field full">Notes (optional)
+              <textarea name="notes" rows="3" placeholder="Anything we should know, e.g. preferred delivery days"></textarea>
+            </label>
+          </div>
+
+          <p style="margin-top:20px"><button class="btn btn-block" id="submit-order" type="submit">Send order request</button></p>
+          <p class="fine">Ships to <span data-cfg="shipsTo"></span>. Flat-rate shipping: <span data-cfg="shippingFlatRate"></span> per order.</p>
+        </form>
+
+        <aside class="summary-box">
+          <h3>Order summary</h3>
+          <div id="order-summary"></div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <script src="data/config.js"></script>
+  <script src="data/shells.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
